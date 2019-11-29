@@ -1,63 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:simple_form/register/register.dart';
 
 class RegisterDetails extends StatelessWidget {
-  final int index;
+  final int firstColumnFlex = 1;
+  final int secondColumnFlex = 3;
+  final Register register;
+  final TextStyle boldTextStyle = TextStyle(fontWeight: FontWeight.bold);
 
-  RegisterDetails({this.index});
+  RegisterDetails({this.register});
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle boldText = TextStyle(fontWeight: FontWeight.bold);
     return Card(
-        margin: EdgeInsets.fromLTRB(4, 4, 4, 4),
+        margin: EdgeInsets.all(8.0),
+        elevation: 4,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text('Nome',
-                          style: boldText),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: Text('Renan Morais Lopes'),
-                      flex: 4,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text('Idade',
-                          style: boldText),
-                      flex: 2,
-                    ),
-                    Expanded(
-                      child: Text('22'),
-                      flex: 2,
-                    ),
-                    Expanded(
-                      child: Text('Telefone',
-                          style: boldText),
-                      flex: 3,
-                    ),
-                    Expanded(
-                      child: Text('(11) 1234-5678'),
-                      flex: 3,
-                    ),
-                  ],
-                ),
-              ),
+              _nameField(),
+              _emailField(),
+              _ageField(),
+              _phoneField(),
             ],
           ),
         ));
+  }
+
+  Widget _fieldTemplate(List<Widget> widgets) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Row(
+        children: widgets,
+      ),
+    );
+  }
+
+  Widget _nameField() {
+    return _fieldTemplate(<Widget>[
+      Expanded(
+        child: Text('Nome', style: boldTextStyle),
+        flex: firstColumnFlex,
+      ),
+      Expanded(
+        child: Text(register.name),
+        flex: secondColumnFlex,
+      ),
+    ]);
+  }
+
+  Widget _emailField() {
+    return _fieldTemplate(<Widget>[
+      Expanded(
+        child: Text('Email', style: boldTextStyle),
+        flex: firstColumnFlex,
+      ),
+      Expanded(
+        child: Text(register.email),
+        flex: secondColumnFlex,
+      ),
+    ]);
+  }
+
+  Widget _ageField() {
+    return _fieldTemplate(<Widget>[
+      Expanded(
+        child: Text('Idade', style: boldTextStyle, textAlign: TextAlign.start),
+        flex: firstColumnFlex,
+      ),
+      Expanded(
+        child: Text(register.age),
+        flex: secondColumnFlex,
+      ),
+    ]);
+  }
+
+  Widget _phoneField() {
+    return _fieldTemplate(<Widget>[
+      Expanded(
+        child: Text('Telefone', style: boldTextStyle),
+        flex: firstColumnFlex,
+      ),
+      Expanded(
+        child: Text(register.phone),
+        flex: secondColumnFlex,
+      ),
+    ]);
   }
 }

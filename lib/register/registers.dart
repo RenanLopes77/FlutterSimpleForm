@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simple_form/register/register.dart';
 import './register_details.dart';
+import '../form/my_form.dart';
 
 class Registers extends StatefulWidget {
   @override
@@ -7,15 +9,35 @@ class Registers extends StatefulWidget {
 }
 
 class _RegistersState extends State<Registers> {
-  final items = List<String>.generate(50, (i) => "Item $i");
+  final List<Register> registers = [];
+
+  addRegister(Register register) {
+    setState(() => registers.add(register));
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return new RegisterDetails(index: index);
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Registros'),
+        backgroundColor: Colors.redAccent,
+      ),
+      body: ListView.builder(
+        itemCount: registers.length,
+        itemBuilder: (context, index) {
+          return new RegisterDetails(register: registers[index]);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.redAccent,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyForm(addRegister)),
+          );
+        },
+      ),
     );
   }
 }
