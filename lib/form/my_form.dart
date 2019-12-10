@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../register/register.dart';
-import '../utils/validators.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
+import '../register/register.dart';
+import '../utils/validators.dart';
 
 class MyForm extends StatelessWidget {
   final void Function(Register) addRegisterCallback;
@@ -32,7 +32,8 @@ class BodyForm extends StatefulWidget {
 class _BodyFormState extends State<BodyForm> {
   final _formKey = GlobalKey<FormState>();
   final _register = new Register();
-  final MaskedTextController phoneMask = new MaskedTextController(mask: '(00) 00000-0000');
+  final MaskedTextController phoneMask =
+      new MaskedTextController(mask: '(00) 00000-0000');
   final void Function(Register) addRegisterCallback;
 
   _BodyFormState(this.addRegisterCallback);
@@ -42,7 +43,8 @@ class _BodyFormState extends State<BodyForm> {
       return 'Please enter email';
     }
 
-    Pattern emailPattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    Pattern emailPattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
     if (!RegExp(emailPattern).hasMatch(value)) {
       return 'Enter Valid Email';
@@ -84,12 +86,12 @@ class _BodyFormState extends State<BodyForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Email'
-                ),
+                decoration: InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  return Validators().isEmail(value, emptyMessage: 'Adicione um email', notMatchMessage: 'Este email é inválido');
+                  return Validators().isEmail(value,
+                      emptyMessage: 'Adicione um email',
+                      notMatchMessage: 'Este email é inválido');
                 },
                 onSaved: (value) {
                   setState(() {
@@ -98,12 +100,11 @@ class _BodyFormState extends State<BodyForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Idade'
-                ),
+                decoration: InputDecoration(labelText: 'Idade'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  return Validators().notEmpty(value, emptyMessage: 'Adicione a idade');
+                  return Validators()
+                      .notEmpty(value, emptyMessage: 'Adicione a idade');
                 },
                 onSaved: (value) {
                   setState(() {
@@ -113,9 +114,7 @@ class _BodyFormState extends State<BodyForm> {
               ),
               TextFormField(
                 controller: phoneMask,
-                decoration: InputDecoration(
-                  labelText: 'Telefone'
-                ),
+                decoration: InputDecoration(labelText: 'Telefone'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value.isEmpty) {

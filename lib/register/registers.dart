@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_form/register/register.dart';
+
 import './register_details.dart';
 import '../form/my_form.dart';
 
